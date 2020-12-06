@@ -1,0 +1,182 @@
+Please provide your name and AWS account ID:
+Name: Garry Kabongno, accountNo. 1365-6538-5221
+
+What steps did you take to get the front-end up and running?
+First I dockerized the app using the base image then I pushed it to my dockerhub account.
+Then I created a pod for testing purposes. After I saw that I was able to curl the app, I created a deployment
+to make the app HA. After this, I created a service of type LoadBalancer and connected it to the relevant ports.
+After I deployed the service, I tested the load balancer in my browser by using the DNS name and I saw that the front end was up and running.
+
+Any specific challenges?
+Connecting the backend
+
+How did you connect the front-end with the back-end?
+Unfortunately, I did not manage to do this.
+
+How did you find out what was necessary?
+I couldn't figure it out unfortunately.
+
+Document the implementation process here. Include all key actions taken (commands, manifest(s), manual actions etc.). Be specific!
+cd eks/project/frontend/
+   35  ls
+   36  vi Dockerfile
+   37  docker build -t garrykab/eks .
+   38  vi Dockerfile
+   39  docker build -t garrykab/eks .
+   40  docker run -p 8888:4567 garrykab/eks
+   41  docker login
+   42  docker push garrykab/eks
+   43  docker run -p 8888:4567 garrykab/eks
+   44  docker run -p 8080:4567 garrykab/eks
+   45  docker run -p 5000:4567 garrykab/eks
+   46  vi Dockerfile 
+   47  docker run -p 8080:4567 garrykab/eks
+   48  vi Dockerfile 
+   49  docker build -t garrykab/eks .
+   50  docker push
+   51  docker push garrykab/eks
+   52  docker run -p 5000:5000 garrykab/eks
+   53  vi Dockerfile 
+   54  docker build -t garrykab/eks .
+   55  docker push garrykab/eks
+   56  docker run -p 5000:5000 garrykab/eks
+   57  vi Dockerfile
+   58  docker build -t garrykab/eks .
+   59  docker push garrykab/eks
+   60  docker images
+   61  ls
+   62  cd ..
+   63  ls
+   64  vi pod.yml
+   65  kubectl apply -f pod.yaml
+   66  ls
+   67  mv pod.yml pod.yaml
+   68  kubectl apply -f pod.yaml
+   69  kubectl get po --all-namespaces
+   70  kubectl port-forward pod/front-end 8080:4567 &
+   71  kubectl logs front-end
+   72  ls
+   73  vi deployment.yaml
+   74  kubectl apply -f deployment.yaml
+   75  kubectl get deployments
+   76  kubectl get pods --all-namespaces
+   77  kubectl port-forward front-end-deployment-7f585657b-hgwtn 8080:4567 &
+   78  vi service.yaml
+   79  kubectl apply -f service.yaml
+   80  kubectl get services
+   81  kubectl describe service front-end-service
+   82  kubectl get pods
+   83  kubectl get pods -o wide
+   84  kubectl get pods --all-namespaces
+   85  clear
+   86  kubectl get pods -ndefault
+   87  kubectl delete po front-end
+   88  kubectl port-forward front-end-deployment-7f585657b-hgwtn 8080:4567 &
+   89  netstat
+   90  netstat -a -n -o
+   91  netstat -ano | findstr 8080
+   92  netstat -ano | grep 8080
+   93  netstat -ano
+   94  curl localhost:8080
+   95  kubectl port-forward front-end-deployment-7f585657b-hgwtn 8888:4567 &
+   96  kubectl port-forward front-end-deployment-7f585657b-hgwtn 8080:4567 &
+   97  kubectl get pods
+   98  clear
+   99  ls
+  100  cd frontend
+  101  vi Dockerfile 
+  102  ls
+  103  kubectl get deployments
+  104  kubectl describe deployments
+  105  kubectl describe services front-end-service
+  106  ls
+  107  cd ..
+  108  vi service.yaml 
+  109  kubectl apply -f service.yaml
+  110  vi service.yaml 
+  111  kubectl apply -f service.yaml
+  112  kubectl describe service front-end-service
+  113  cd cd ~/environment/eks/labs/06-services
+  114  ls
+  115  kubect apply -f pod.yaml 
+  116  kubectl apply -f pod.yaml 
+  117  kubectl port-forward pod/front-end 8080:4567 &
+  118  docker ps
+  119  docker images
+  120  netstat -nlp | grep 8080
+  121  kill 10978
+  122  kubectl port-forward front-end-deployment-7f585657b-hgwtn 8080:4567 &
+  123  netstat -nlp | grep 8080
+  124  kill 18478
+  125  kubectl get pods
+  126  kubectl port-forward front-end-deployment-7f585657b-d8s7v 8080:4567 &
+  127  netstat -nlp | grep 8080
+  128  kill 19201
+  129  vi service.yaml 
+  130  kubectl get services
+  131  kubectl apply -f service.yaml 
+  132  vi service.yaml 
+  133  kubectl apply -f service.yaml 
+  134  vi service.yaml 
+  135  kubectl apply -f service.yaml 
+  136  kubectl get pods
+  137  kubectl get services
+  138  watch 'kubectl get services'
+  139  kubectl get services
+  140  kubectl describe service front-end-service
+  141  vi service.yaml 
+  142  kubectl apply -f service.yaml 
+  143  kubectl describe service front-end-service
+  144  kubectl get pods -o wide
+  145  curl http://ip-192-168-71-182.eu-central-1.compute.internal:8080
+  146  curl http://a63d30a30870344ff811f0c42441b392-671493190.eu-central-1.elb.amazonaws.com:8080
+  147  ls
+  148  vi service.yaml
+  149  vi deployment.yaml
+  150  vi service.yaml
+  151  vi deployment.yaml
+  152  vi backend-deployment.yaml
+  153  kubectl apply -f backend-deployment.yaml
+  154  vi backend-deployment.yaml
+  155  kubectl apply -f backend-deployment.yaml
+  156  vi backend-deployment.yaml
+  157  kubectl apply -f backend-deployment.yaml
+  158  kubectl get pods
+  159  ls
+  160  cd frontend/
+  161  ls
+  162  vi app.rb
+  163  vi backend-service.yaml
+  164  kubectl apply -f backend-service.yaml
+  165  kubectl get pods -o wide
+  166  ls
+  167  mv backend-service.yaml ../
+  168  ls
+  169  cd ../
+  170  vi backend-deployment.yaml
+  171  kubectl apply -f backend-deployment.yaml
+  172  kubectl get pods -o wide
+  173  vi backend-service.yaml
+  174  kubectl apply -f backend-service.yaml
+  175  kubectl get pods -o wide
+  176  vi backend-service.yaml
+  177  kubectl apply -f backend-service.yaml
+  178  vi backend-service.yaml
+  179  kubectl apply -f backend-service.yaml
+  180  vi backend-service.yaml
+  181  kubectl apply -f backend-service.yaml
+  182  vi backend-service.yaml
+  183  kubectl apply -f backend-service.yaml
+  184  vi backend-service.yaml
+  185  kubectl apply -f backend-service.yaml
+  186  vi backend-service.yaml
+  187  kubectl apply -f backend-service.yaml
+  188  vi backend-service.yaml
+  189  kubectl apply -f backend-service.yaml
+  190  vi backend-service.yaml
+
+
+Did you attempt the Bonus question(s)? If yes, please describe how you achieved the results.
+What was the most difficult part of the challenge and why?
+Connecting the front end to the bakend
+Two Tier Architecture on Kubernetes

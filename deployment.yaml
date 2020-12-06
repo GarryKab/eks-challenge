@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-end-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-front-end
+  template:
+    metadata:
+      labels:
+        app: web-front-end
+    spec:
+      containers:
+      - name: front-end-cont
+        image: garrykab/eks
+        ports:
+        - containerPort: 8080
